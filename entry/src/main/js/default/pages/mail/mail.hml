@@ -1,0 +1,43 @@
+<element name="text-avatar" src="../../common/components/TextAvatar/TextAvatar.hml"></element>
+
+<div class="container">
+    <div class="mail-header">
+        <div class="header-left" @click="handleExpand">
+            <image class="left-icon icon" src="../../common/images/expand.png"></image>
+            <div class="left-content">
+                <div class="content-title">
+                    <text>
+                        收件箱{{count}}
+                    </text>
+                </div>
+                <div class="content-desc">
+                    <text>
+                        tanleidd@163.com
+                    </text>
+                </div>
+            </div>
+        </div>
+        <div class="header-right">
+            <image class="right-icon icon" src="../../common/images/more.png"></image>
+        </div>
+    </div>
+    <div class="mail-content">
+        <list>
+            <list-item for="[1,2,3]">
+                <div class="mail-card">
+                    <div style="margin: 0 8px;">
+                        <text-avatar text="团"></text-avatar>
+                    </div>
+                    <div class="card-right">
+                        <text class="_from">美团</text>
+                        <text class="title">美团校园招聘——视频面试信息变更</text>
+                        <text class="content">谭磊 你好，嗨，注意到你的面试行...</text>
+                    </div>
+                    <div class="mail-date">
+                        <text>03-28</text>
+                    </div>
+                </div>
+            </list-item>
+        </list>
+    </div>
+</div>

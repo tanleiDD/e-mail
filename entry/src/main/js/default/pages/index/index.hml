@@ -1,5 +1,32 @@
+<element name='mail' src='../mail/mail.hml'></element>
+<element name='contacts' src='../contacts/contacts.hml'></element>
+<element name='profile' src='../profile/profile.hml'></element>
+
 <div class="container">
-    <text class="title">
-        {{ $t('strings.hello') }} {{ title }}
-    </text>
+    <tabs class="tabs" index="0" onchange="change" >
+        <tab-bar class="tab-bar" mode="fixed" >
+            <div class="tab-bar-item" for="bars">
+                <div class="tab-bar-content">
+                    <image src="{{ $item.activeIcon }}" class="tab-image" if="{{ $item.show }}"
+                            style="width: {{$item.activeIconSize.width}};height: {{$item.activeIconSize.height}};margin: {{$item.activeIconSize.margin}}"
+                            ></image>
+                    <image src="{{ $item.icon }}" class="tab-image" else
+                           style="width: {{$item.iconSize.width}};height: {{$item.iconSize.height}};margin: {{$item.iconSize.margin}}"
+                            ></image>
+                    <text class="tab-text {{ $item.show ? 'tab-text-active' : '' }}">{{ $item.text }}</text>
+                </div>
+            </div>
+        </tab-bar>
+        <tab-content class="tab-content" scrollable="false">
+            <div class="item-content"  >
+                <mail ></mail>
+            </div>
+            <div class="item-content" >
+                <contacts></contacts>
+            </div>
+            <div class="item-content" >
+                <profile ></profile>
+            </div>
+        </tab-content>
+    </tabs>
 </div>

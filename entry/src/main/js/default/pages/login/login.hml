@@ -1,0 +1,16 @@
+<div class="container">
+    <div class="login-title">
+        <text>登录邮箱账号</text>
+    </div>
+    <div class="login-content">
+        <div class="input-field">
+            <input class="input" placeholder="请输入邮箱账号" type="text"></input>
+            <input class="input" placeholder="请输入邮箱密码" type="password"></input>
+        </div>
+        <div class="login-submit">
+            <button class="button" @click="handleLogin">
+                登录
+            </button>
+        </div>
+    </div>
+</div>

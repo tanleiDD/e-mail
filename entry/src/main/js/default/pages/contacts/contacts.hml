@@ -1,0 +1,31 @@
+<element name="text-avatar" src="../../common/components/TextAvatar/TextAvatar.hml"></element>
+
+
+<div class="container">
+    <div class="contacts-header">
+        <div class="header-left">
+            <image class="right-image" src="../../common/images/add-user.png"></image>
+        </div>
+        <div class="header-title">
+            <text>通讯录</text>
+        </div>
+        <div class="header-right">
+            <image class="left-image" src="../../common/images/search.png"></image>
+        </div>
+    </div>
+    <div class="contacts-content">
+        <list class="list">
+            <list-item-group for="contact in contacts">
+                <list-item><text class="group-title">{{contact.title}}</text></list-item>
+                <list-item for="mail in contact.mails" class="group-item">
+                    <div style="margin: 0 16px;">
+                        <text-avatar text="{{mail[0].toUpperCase()}}"></text-avatar>
+                    </div>
+                    <div class="contacts-mail">
+                        <text>{{mail}}</text>
+                    </div>
+                </list-item>
+            </list-item-group>
+        </list>
+    </div>
+</div>

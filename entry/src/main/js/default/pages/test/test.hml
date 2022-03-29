@@ -1,0 +1,24 @@
+<div class="container">
+    <tabs onchange="changeTabactive">
+        <tab-content>
+            <div class="item-container" for="datas.list">
+                <div if="{{$item.title=='List1'?true:false}}">
+                    <image src="common/images/bg-tv.jpg" style="object-fit: contain;"> </image>
+                </div>
+                <div if="{{$item.title=='List2'?true:false}}">
+                    <image src="common/images/bg-tv.jpg" style="object-fit: none;"> </image>
+                </div>
+                <div if="{{$item.title=='List3'?true:false}}">
+                    <image src="common/images/bg-tv.jpg" style="object-fit: contain;"> </image>
+                </div>
+            </div>
+        </tab-content>
+        <tab-bar class="tab_bar" mode="fixed">
+            <div class="tab_item" for="datas.list">
+                <text style="color: {{$item.color}};">{{$item.title}}</text>
+<!--                <div class="underline-show" if="{{$item.show}}"></div>-->
+<!--                <div class="underline-hide" if="{{!$item.show}}"></div>-->
+            </div>
+        </tab-bar>
+    </tabs>
+</div>

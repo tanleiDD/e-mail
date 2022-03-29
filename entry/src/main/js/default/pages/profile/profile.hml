@@ -1,0 +1,36 @@
+<div class="container">
+    <div class="profile-header">
+        <div class="header-title">
+            <text>账号与个人信息</text>
+        </div>
+    </div>
+    <div class="profile-content">
+        <list class="content-list" style="height: 150px;">
+                <list-item class="list-item">
+                    <div class="field">
+                        <text class="field-name">头像</text>
+                        <div class="field-right">
+                            <image class="avatar" src="../../common/images/temp-avatar.jpg"></image>
+                            <image class="arrow-right" src="../../common/images/arrow-right.png"></image>
+                        </div>
+                    </div>
+                </list-item>
+                <list-item class="list-item">
+                    <div class="field">
+                        <text class="field-name">姓名</text>
+                        <div class="field-right">
+                            <text class="field-value">谭磊</text>
+                            <image class="arrow-right" src="../../common/images/arrow-right.png"></image>
+                        </div>
+                    </div>
+                </list-item>
+        </list>
+        <list class="content-list" style="margin-top: 16px">
+            <list-item class="list-item" @click="handleLogout">
+                <div class="field">
+                    <text class="field-name exit">退出邮箱账号</text>
+                </div>
+            </list-item>
+        </list>
+    </div>
+</div>

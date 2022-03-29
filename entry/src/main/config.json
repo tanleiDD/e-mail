@@ -7,7 +7,13 @@
       "name": "1.0.0"
     }
   },
-  "deviceConfig": {},
+  "deviceConfig": {
+    "default": {
+      "network": {
+        "cleartextTraffic": true
+      }
+    }
+  },
   "module": {
     "package": "com.tanleidd.email",
     "name": ".MyApplication",
@@ -44,7 +50,12 @@
     "js": [
       {
         "pages": [
-          "pages/index/index"
+          "pages/login/login",
+          "pages/index/index",
+          "pages/mail/mail",
+          "pages/contacts/contacts",
+          "pages/profile/profile",
+          "pages/test/test",
         ],
         "name": "default",
         "window": {
@@ -52,6 +63,19 @@
           "autoDesignWidth": true
         }
       }
-    ]
+    ],
+    "reqPermissions": [
+      {
+        "name": "ohos.permission.INTERNET"
+      }
+    ],
+    "metaData": {
+      "customizeData": [
+        {
+          "name": "hwc-theme",
+          "value": "androidhwext:style/Theme.Emui.NoTitleBar"
+        }
+      ]
+    }
   }
 }
