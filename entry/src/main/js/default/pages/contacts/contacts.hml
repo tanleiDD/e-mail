@@ -1,16 +1,16 @@
 <element name="text-avatar" src="../../common/components/TextAvatar/TextAvatar.hml"></element>
 
-
 <div class="container">
     <div class="contacts-header">
-        <div class="header-left">
+        <div class="header-left" @click="handleAddUserClick" click-effect="spring-large">
             <image class="right-image" src="../../common/images/add-user.png"></image>
         </div>
         <div class="header-title">
             <text>通讯录</text>
         </div>
         <div class="header-right">
-            <image class="left-image" src="../../common/images/search.png"></image>
+<!--            <image class="left-image" src="../../common/images/search.png"></image>-->
+            <image class="left-image" src=""></image>
         </div>
     </div>
     <div class="contacts-content">
@@ -18,14 +18,58 @@
             <list-item-group for="contact in contacts">
                 <list-item><text class="group-title">{{contact.title}}</text></list-item>
                 <list-item for="mail in contact.mails" class="group-item">
-                    <div style="margin: 0 16px;">
-                        <text-avatar text="{{mail[0].toUpperCase()}}"></text-avatar>
-                    </div>
-                    <div class="contacts-mail">
-                        <text>{{mail}}</text>
+                    <div style="width: 100%;height: 100%;" @click="handleContactsItemClick">
+                        <div style="margin: 0 16px;align-items: center;">
+                            <text-avatar text="{{mail[0].toUpperCase()}}"></text-avatar>
+                        </div>
+                        <div class="contacts-mail">
+                            <text>{{mail}}</text>
+                        </div>
                     </div>
                 </list-item>
             </list-item-group>
         </list>
     </div>
+    <panel id="contacts-panel" class="panel" type="temporary" mode="half">
+        <div style="width: 100%; height: 100%; flex-direction: column;">
+            <div class="panel-title">
+                <text @click="handleCancelClick">取消</text>
+                <text disabled="{{contactsPanelData.saveDisabled}}" class="{{contactsPanelData.saveDisabled ? 'save-disabled' : ''}}" @click="handleSaveClick">保存</text>
+            </div>
+            <list class="panel-list">
+                <list-item  class="panel-list-item" clickeffect="false">
+                    <div>
+                        <text class="item-text">名称</text>
+                        <input class="item-input" @change="handleAccountNameChange"></input>
+                    </div>
+                </list-item>
+                <list-item  class="panel-list-item" clickeffect="false">
+                    <div>
+                        <text class="item-text">邮箱</text>
+                        <input class="item-input" @change="handleMailAccountChange"></input>
+                    </div>
+                </list-item>
+            </list>
+        </div>
+    </panel>
+    <panel id="contacts-item-panel" class="contacts-item-panel" type="temporary" mode="half" >
+        <div style="width: 100%;height: 100%;flex-direction: column;">
+            <div class="panel-title">
+                <text @click="handleCancelContactsItemClick">取消</text>
+            </div>
+            <div style="height: 40%;justify-content: center;align-items: center;border-bottom: 1px solid  #F5F5F5;">
+                <text-avatar text="团" size="64px"></text-avatar>
+            </div>
+            <div style="justify-content: space-around;align-items: center;height: 50%;width: 100%;">
+                <div class="item-wrapper" click-effect="spring-large" @click="handleSendMailClick">
+                    <image src="../../common/images/send-mail.png" class="round"></image>
+                    <text class="contacts-item-text">发邮件</text>
+                </div>
+                <div class="item-wrapper" click-effect="spring-large">
+                    <image src="../../common/images/del-friend.png" class="round" style="padding: 16px;"></image>
+                    <text class="contacts-item-text">删除好友</text>
+                </div>
+            </div>
+        </div>
+    </panel>
 </div>

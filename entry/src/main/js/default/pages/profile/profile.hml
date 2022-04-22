@@ -7,19 +7,19 @@
     <div class="profile-content">
         <list class="content-list" style="height: 150px;">
                 <list-item class="list-item">
-                    <div class="field">
+                    <div class="field" @click="handleAvatarClick">
                         <text class="field-name">头像</text>
                         <div class="field-right">
-                            <image class="avatar" src="../../common/images/temp-avatar.jpg"></image>
+                            <image class="round" src="{{avatar}}"></image>
                             <image class="arrow-right" src="../../common/images/arrow-right.png"></image>
                         </div>
                     </div>
                 </list-item>
                 <list-item class="list-item">
-                    <div class="field">
+                    <div class="field" @click="handleNameClick">
                         <text class="field-name">姓名</text>
                         <div class="field-right">
-                            <text class="field-value">谭磊</text>
+                            <text class="field-value">{{name}}</text>
                             <image class="arrow-right" src="../../common/images/arrow-right.png"></image>
                         </div>
                     </div>
@@ -33,4 +33,40 @@
             </list-item>
         </list>
     </div>
+    <panel id="name-panel" class="name-panel" type="temporary" mode="half">
+        <div style="width: 100%;height: 100%;flex-direction: column;">
+            <div class="panel-title">
+                <text @click="handleCancelNameClick">取消</text>
+<!--                <text>姓名</text>-->
+                <text @click="handleSaveNameClick" disabled="{{namePanelData.saveNameDisabled}}" class="{{namePanelData.saveNameDisabled ? 'save-name-disabled' : ''}}">保存</text>
+            </div>
+            <div style="padding: 0% 16px;">
+                <input class="panel-input" @change="handleNameChange"></input>
+            </div>
+        </div>
+    </panel>
+    <panel  id="avatar-panel" class="avatar-panel" type="temporary" mode="half" >
+        <div style="width: 100%;height: 100%;flex-direction: column;">
+            <div class="panel-title">
+                <text @click="handleCancelAvatarClick">取消</text>
+<!--                <text>头像</text>-->
+                <text @click="handleSaveAvatarClick" disabled="{{avatarPanelData.saveAvatarDisabled}}" class="{{avatarPanelData.saveAvatarDisabled ? 'save-avatar-disabled' : ''}}">保存</text>
+            </div>
+            <div style="height: 40%;justify-content: center;align-items: center;border-bottom: 1px solid  #E3E3E3;">
+                <image src="{{avatar}}" class="round" style="height: 64px;width: 64px;"></image>
+            </div>
+            <div style="justify-content: space-around;align-items: center;height: 50%;width: 100%;">
+                <div class="item-wrapper" click-effect="spring-large">
+                    <image src="../../common/images/camera.png" class="round" style="width: 64px;height: 64px;"></image>
+                    <text class="avatar-text">拍摄</text>
+                </div>
+                <div class="item-wrapper" click-effect="spring-large">
+                    <image src="../../common/images/album.png" class="round" style="width: 64px;height: 64px;"></image>
+                    <text class="avatar-text">从相册选择</text>
+                </div>
+            </div>
+
+        </div>
+    </panel>
+
 </div>

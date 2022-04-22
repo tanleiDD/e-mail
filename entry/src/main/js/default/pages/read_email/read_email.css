@@ -1,0 +1,78 @@
+.container {
+    flex-direction: column;
+    font-size: 22px;
+}
+
+.read_email-header {
+    background-color: #EEEEF0;
+    flex-direction: column;
+    padding: 0 8px;
+}
+
+.header-icon {
+    justify-content: space-between;
+    width: 100%;
+    align-items: center;
+    height: 64px;
+}
+
+.header-left {
+    justify-content: flex-end;
+}
+
+.header-title {
+    height: 64px;
+    font-size: 28px;
+    align-items: center;
+}
+
+.read_email-content {
+    flex-direction: column;
+}
+
+.icon {
+    width: 32px;
+    height: 32px;
+}
+
+.arrow-left {
+    padding: 1px;
+}
+
+.delete {
+    width: 34px;
+    height: 34px;
+}
+
+.user-card {
+    align-items: center;
+    width: 100%;
+    padding: 8px;
+}
+
+.card-right {
+    padding-left: 8px;
+    flex-direction: column;
+    font-size: 20px;
+}
+
+.user-name {
+
+}
+
+.user-to {
+    font-size: 16px;
+    color: #818181
+}
+
+.received-time {
+    font-size: 16px;
+    color: #818181;
+    position: absolute;
+    right: 8px;
+    bottom: 0px;
+}
+
+.content-data {
+    padding: 8px;
+}

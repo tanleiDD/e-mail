@@ -1,0 +1,90 @@
+.container {
+    flex-direction: column;
+    font-size: 20px;
+}
+
+.write_email-header {
+    width: 100%;
+    height: 64px;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #FAFAFA;
+    padding: 0% 16px;
+    border-bottom: 1px solid #E5E5E5;
+}
+
+.header-left {
+    align-items: center;
+}
+
+.icon {
+    width: 32px;
+    height: 32px;
+    padding: 4px;
+}
+
+.user-card {
+    align-items: center;
+    justify-content: space-between;
+    padding-left: 24px;
+}
+
+.card-right {
+    padding-left: 8px;
+    flex-direction: column;
+}
+
+.user-name {
+
+}
+
+.user-email {
+    font-size: 16px;
+    color: #818181
+}
+
+.write_email-content {
+    flex-direction: column;
+}
+
+.content-meta {
+    flex-direction: column;
+    padding: 0 16px;
+    font-size: 22px;
+}
+
+.recipient,
+.theme {
+    border-bottom: 1px solid #E5E5E5;
+}
+
+.label {
+    color: #C9CACC;
+    width: 104px;
+    align-items: center;
+    margin-left: 16px;
+}
+
+.meta-field {
+    background-color: white;
+    border-radius: 0px;
+    height: 64px;
+    placeholder-color: #C9CACC;
+}
+
+.attach {
+    position: absolute;
+    right: 16px;
+    top: 16px;
+    padding: 0;
+}
+
+.content-data {
+    background-color: white;
+    border-radius: 0;
+    height: 75%;
+}
+
+
+
+

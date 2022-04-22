@@ -45,19 +45,42 @@
         "label": "$string:entry_MainAbility",
         "type": "page",
         "launchType": "standard"
+      },
+      {
+        "name": "com.tanleidd.email.MainAbility2",
+        "icon": "$media:icon",
+        "description": "$string:mainability2_description",
+        "label": "$string:entry_MainAbility2",
+        "type": "page",
+        "launchType": "standard"
+      },
+      {
+        "name": "com.tanleidd.email.ServiceAbility",
+        "icon": "$media:icon",
+        "description": "$string:serviceability_description",
+        "type": "service"
       }
     ],
     "js": [
       {
         "pages": [
-          "pages/login/login",
           "pages/index/index",
-          "pages/mail/mail",
-          "pages/contacts/contacts",
-          "pages/profile/profile",
+          "pages/login/login",
           "pages/test/test",
+          "pages/read_email/read_email",
+          "pages/write_email/write_email"
         ],
         "name": "default",
+        "window": {
+          "designWidth": 720,
+          "autoDesignWidth": true
+        }
+      },
+      {
+        "pages": [
+          "pages/index/index"
+        ],
+        "name": "default2",
         "window": {
           "designWidth": 720,
           "autoDesignWidth": true
@@ -67,6 +90,9 @@
     "reqPermissions": [
       {
         "name": "ohos.permission.INTERNET"
+      },
+      {
+        "name": "ohos.permission.CAMERA"
       }
     ],
     "metaData": {

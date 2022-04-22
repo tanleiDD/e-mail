@@ -2,12 +2,12 @@
 
 <div class="container">
     <div class="mail-header">
-        <div class="header-left" @click="handleExpand">
+        <div class="header-left" @click="handleExpand" click-effect="spring-large">
             <image class="left-icon icon" src="../../common/images/expand.png"></image>
             <div class="left-content">
                 <div class="content-title">
                     <text>
-                        收件箱{{count}}
+                        {{curMail.title}}{{count}}
                     </text>
                 </div>
                 <div class="content-desc">
@@ -17,14 +17,14 @@
                 </div>
             </div>
         </div>
-        <div class="header-right">
-            <image class="right-icon icon" src="../../common/images/more.png"></image>
+        <div class="header-right" click-effect="spring-large">
+            <image class="right-icon icon" src="../../common/images/edit.png" @click="handleEditClick"></image>
         </div>
     </div>
     <div class="mail-content">
         <list>
             <list-item for="[1,2,3]">
-                <div class="mail-card">
+                <div class="mail-card" @click="handleMailClick">
                     <div style="margin: 0 8px;">
                         <text-avatar text="团"></text-avatar>
                     </div>
@@ -40,4 +40,15 @@
             </list-item>
         </list>
     </div>
+    <panel id="mail-panel" class="panel" type="temporary" mode="half">
+        <list class="panel-list">
+            <list-item for="mailPanelData" class="panel-list-item {{$item.show ? 'item-active' : ''}}" clickeffect="false">
+                <div @click="handlePanelItemClick" data-index="{{$idx}}" style="width: 100%; height: 100%;" click-effect="spring-large">
+                    <image class="item-icon" src="{{$item.icon}}" if="{{!$item.show}}"></image>
+                    <image class="item-icon" src="{{$item.activeIcon}}" else></image>
+                    <text class="item-text">{{$item.text}}</text>
+                </div>
+            </list-item>
+        </list>
+    </panel>
 </div>

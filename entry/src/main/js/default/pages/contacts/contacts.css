@@ -7,7 +7,7 @@
     height: 64px;
     justify-content: space-between;
     align-items: center;
-    background-color: #FAFAFA;
+    background-color: #FCFCFC;
     border-bottom: 1px solid #F3F3F3;
 }
 
@@ -57,4 +57,68 @@
     height: 100%;
     align-items: center;
     border-bottom: 1px solid  #F3F3F3;
+}
+
+.panel {
+    background-color: #FFF;
+    font-size: 22px;
+}
+
+.panel-title {
+    width: 100%;
+    height: 64px;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 16px;
+    font-size: 20px;
+}
+
+.save-disabled {
+    color: #AAA;
+}
+
+.panel-list {
+
+}
+
+
+.panel-list-item {
+    padding: 0 16px;;
+    height: 64px;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.item-input {
+    height: 64px;
+    background-color: white;
+    border-radius: 0px;
+    border-bottom: 1px solid #F3F3F3;
+    flex-weight: 10;
+}
+
+.item-text {
+    flex-weight: 2;
+    color: #AAA;
+}
+
+.item-wrapper {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.contacts-item-panel {
+    background-color: white;
+}
+
+.round {
+    width: 64px;
+    height: 64px;
+    border-radius: 64px;
+    background-color: #F5F5F5;
+}
+
+.contacts-item-text {
+    font-size: 16px;
 }

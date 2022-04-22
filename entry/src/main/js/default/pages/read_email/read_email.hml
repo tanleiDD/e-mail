@@ -1,0 +1,32 @@
+<element name="text-avatar" src="../../common/components/TextAvatar/TextAvatar.hml"></element>
+
+<div class="container">
+    <div class="read_email-header">
+        <div class="header-icon">
+            <image class="icon arrow-left" src="../../common/images/arrow-left.png" @click="handleBackClick"></image>
+            <div class="header-left">
+                <image class="icon delete" src="../../common/images/delete.png" @click="handleDeleteClick"></image>
+            </div>
+        </div>
+        <div class="header-title">
+            <text>【网易校招】笔试提醒{{msg}}</text>
+        </div>
+    </div>
+    <div class="read_email-content">
+        <div class="user-card">
+            <text-avatar class="card-left" size="42px" text="团"></text-avatar>
+            <div class="card-right">
+                <text class="user-name">谭磊</text>
+                <text class="user-to">发送至 我</text>
+            </div>
+            <div class="received-time">
+                <text>03-05 12:01</text>
+            </div>
+        </div>
+        <div class="content-data">
+            <text>
+                亲爱的谭磊同学，本次网易校招在线笔试即将开始。
+            </text>
+        </div>
+    </div>
+</div>

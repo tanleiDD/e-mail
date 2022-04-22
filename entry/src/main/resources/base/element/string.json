@@ -7,6 +7,18 @@
     {
       "name": "mainability_description",
       "value": "JS_Empty Ability"
+    },
+    {
+      "name": "mainability2_description",
+      "value": "JS_Empty Ability"
+    },
+    {
+      "name": "entry_MainAbility2",
+      "value": "entry_MainAbility2"
+    },
+    {
+      "name": "serviceability_description",
+      "value": "hap sample empty service"
     }
   ]
 }
