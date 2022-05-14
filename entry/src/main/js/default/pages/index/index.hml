@@ -19,10 +19,10 @@
         </tab-bar>
         <tab-content class="tab-content" scrollable="false">
             <div class="item-content"  >
-                <mail ></mail>
+                <mail cur-mailbox="{{ curMailbox }}" set-mailbox-name="{{ setMailboxName }}"></mail>
             </div>
             <div class="item-content" >
-                <contacts></contacts>
+                <contacts index="{{index}}"></contacts>
             </div>
             <div class="item-content" >
                 <profile ></profile>

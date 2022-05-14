@@ -1,3 +1,5 @@
+import apiService from '../../utils/apiService.js'
+
 export default {
     data: {
         bars: [
@@ -53,9 +55,15 @@ export default {
                 }
             }
         ],
+        curMailbox: {
+            mailboxName: 'INBOX',
+            mails: [],
+        },
+        index: 0,
     },
     change: function(e) {
         const index = e.index;
+        this.index = index;
         let bar;
         for (let i=0; i<this.bars.length; i++) {
             bar = this.bars[i];
@@ -63,4 +71,68 @@ export default {
         }
         this.bars[index].show = true;
     },
+    async getMailbox(mailboxName) {
+        const mailboxNameMap = {
+            INBOX: apiService.getINBOXMailbox,
+            Send: apiService.getSendMailbox,
+            Deleted: apiService.getDeletedMailbox,
+        }
+
+        const response = await mailboxNameMap[mailboxName]();
+        let { result: mails } = response;
+
+        mails = JSON.parse(mails);
+
+        mails = mails.map(mail => {
+            const { from: _from, to, subject, date, text, } = mail;
+            const { uid, flags } = mail.attributes;
+
+            return {
+                text,
+                _from: _from.value.map(item => {
+                    if (!item.name) {
+                        return {
+                            name: item.address,
+                            address: item.address,
+                        }
+                    }
+                    return item;
+                }),
+                to: to.value.map(item => {
+                    if (!item.name) {
+                        return {
+                            name: item.address,
+                            address: item.address,
+                        }
+                    }
+                    return item;
+                }),
+                subject,
+                date: new Date(date),
+                flags,
+                uid,
+                unread: !flags.includes('\\Seen')
+            }
+        })
+
+        return mails;
+    },
+
+    async fetchMails (mailboxName) {
+        const mails = await this.getMailbox(mailboxName);
+
+        this.curMailbox.mails = mails;
+
+        return mails;
+    },
+
+    async setMailboxName (mailboxName) {
+        this.curMailbox.mailboxName = mailboxName;
+    },
+    async onShow() {
+        await this.fetchMails(this.curMailbox.mailboxName)
+    },
+    onInit() {
+        this.$watch('curMailbox.mailboxName', this.fetchMails)
+    }
 }

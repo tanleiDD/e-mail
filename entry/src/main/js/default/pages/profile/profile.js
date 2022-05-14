@@ -1,9 +1,10 @@
 import router from '@system.router';
 import prompt from '@system.prompt';
+import apiService from '../../utils/apiService.js'
 
 export default {
     data: {
-        name: '谭磊',
+        name: '',
         avatar: '/common/images/temp-avatar.jpg',
         namePanelData: {
             saveNameDisabled: true,
@@ -21,9 +22,12 @@ export default {
     handleCancelNameClick () {
         this.$element('name-panel').close();
     },
-    handleSaveNameClick () {
+    async handleSaveNameClick () {
         this.name = this.namePanelData.name;
 
+        await apiService.updateUser({
+            name: this.name
+        })
         this.$element('name-panel').close();
 
         prompt.showToast({
@@ -78,4 +82,12 @@ export default {
             uri: 'pages/login/login'
         })
     },
+    async onInit() {
+        const response = await apiService.getUser();
+        const user = JSON.parse(response.result);
+
+        if (user) {
+            this.name = user.name;
+        }
+    }
 }

@@ -7,12 +7,12 @@
             <div class="left-content">
                 <div class="content-title">
                     <text>
-                        {{curMail.title}}{{count}}
+                        {{mailboxNameMap[curMailbox.mailboxName]}} {{curMailbox.mails.length}}
                     </text>
                 </div>
                 <div class="content-desc">
                     <text>
-                        tanleidd@163.com
+                        test@tanleidd.fit
                     </text>
                 </div>
             </div>
@@ -23,18 +23,19 @@
     </div>
     <div class="mail-content">
         <list>
-            <list-item for="[1,2,3]">
-                <div class="mail-card" @click="handleMailClick">
+            <list-item for="{{ curMailbox.mails }}">
+                <div class="mail-card" @click="handleMailClick({{$idx}})">
                     <div style="margin: 0 8px;">
-                        <text-avatar text="团"></text-avatar>
+                        <text-avatar text="{{$item['_from'][0].name[0]}}" unread="{{ $item.unread }}"></text-avatar>
                     </div>
                     <div class="card-right">
-                        <text class="_from">美团</text>
-                        <text class="title">美团校园招聘——视频面试信息变更</text>
-                        <text class="content">谭磊 你好，嗨，注意到你的面试行...</text>
+                        <text class="_from">{{ $item['_from'][0].name }}</text>
+                        <text class="title">{{ $item.subject }}</text>
+                        <text class="content">{{ $item.text.length > 30 ? $item.text.slice(0, 30) + '...' : $item.text }}</text>
                     </div>
                     <div class="mail-date">
-                        <text>03-28</text>
+                        <text>{{$item.date.getMonth() + 1 }} - {{ $item.date.getDate() }}</text>
+
                     </div>
                 </div>
             </list-item>

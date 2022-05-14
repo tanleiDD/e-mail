@@ -4,12 +4,12 @@
     </div>
     <div class="login-content">
         <div class="input-field">
-            <input class="input" placeholder="请输入邮箱账号" type="text"></input>
-            <input class="input" placeholder="请输入邮箱密码" type="password"></input>
+            <input class="input" placeholder="请输入邮箱账号" type="text"  value="{{account}}" @change="handleInput('account', target)"></input>
+            <input class="input" placeholder="请输入邮箱密码" type="password"  value="{{password}}" @change="handleInput('password', target)"></input>
         </div>
         <div class="login-submit">
             <button class="button" @click="handleLogin">
-                登录
+                登录/注册
             </button>
         </div>
     </div>

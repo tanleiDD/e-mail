@@ -8,13 +8,12 @@
                 <text-avatar class="card-left" size="42px" text="团"></text-avatar>
                 <div class="card-right">
                     <text class="user-name">谭磊</text>
-                    <text class="user-email">tanleidd@163.com</text>
+                    <text class="user-email">test@tanleidd.fit</text>
                 </div>
             </div>
         </div>
-        <div class="header-right" disabled="{{sendMailDisabled}}" @click="handlePlaneClick">
-            <image class="icon" if="{{ sendMailDisabled }}" src="../../common/images/plane.png"></image>
-            <image class="icon" else src="../../common/images/plane-active.png"></image>
+        <div class="header-right" @click="handlePlaneClick">
+            <image class="icon" src="../../common/images/plane-active.png"></image>
         </div>
     </div>
     <div class="write_email-content">
@@ -23,15 +22,13 @@
                 <div class="label">
                     <text>收件人: </text>
                 </div>
-                <input class="meta-field" type="text" @change="handleRecipientChange"></input>
+                <input class="meta-field" type="text" value="{{to}}" @change="handleInput" data-field="to"></input>
             </div>
             <div class="theme">
-                <input class="meta-field" type="text" placeholder="主题"></input>
+                <input class="meta-field" type="text" placeholder="主题" value="{{subject}}" @change="handleInput" data-field="subject"></input>
                 <image class="icon attach" src="../../common/images/attachment.png" ></image>
             </div>
         </div>
-        <textarea class="content-data">
-
-        </textarea>
+        <textarea class="content-data" value="{{text}}" @change="handleInput" data-field="text"></textarea>
     </div>
 </div>

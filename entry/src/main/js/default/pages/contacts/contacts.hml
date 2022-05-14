@@ -14,16 +14,16 @@
         </div>
     </div>
     <div class="contacts-content">
-        <list class="list">
+        <list class="list" id="list">
             <list-item-group for="contact in contacts">
                 <list-item><text class="group-title">{{contact.title}}</text></list-item>
                 <list-item for="mail in contact.mails" class="group-item">
-                    <div style="width: 100%;height: 100%;" @click="handleContactsItemClick">
+                    <div style="width: 100%;height: 100%;" @click="handleContactsItemClick" data-mail="{{mail}}">
                         <div style="margin: 0 16px;align-items: center;">
-                            <text-avatar text="{{mail[0].toUpperCase()}}"></text-avatar>
+                            <text-avatar text="{{mail.name[0].toUpperCase()}}"></text-avatar>
                         </div>
                         <div class="contacts-mail">
-                            <text>{{mail}}</text>
+                            <text>{{mail.name}}</text>
                         </div>
                     </div>
                 </list-item>
@@ -40,13 +40,13 @@
                 <list-item  class="panel-list-item" clickeffect="false">
                     <div>
                         <text class="item-text">名称</text>
-                        <input class="item-input" @change="handleAccountNameChange"></input>
+                        <input class="item-input" @change="handleInput" data-field="name"></input>
                     </div>
                 </list-item>
                 <list-item  class="panel-list-item" clickeffect="false">
                     <div>
                         <text class="item-text">邮箱</text>
-                        <input class="item-input" @change="handleMailAccountChange"></input>
+                        <input class="item-input" @change="handleInput" data-field="account"></input>
                     </div>
                 </list-item>
             </list>
@@ -58,14 +58,14 @@
                 <text @click="handleCancelContactsItemClick">取消</text>
             </div>
             <div style="height: 40%;justify-content: center;align-items: center;border-bottom: 1px solid  #F5F5F5;">
-                <text-avatar text="团" size="64px"></text-avatar>
+                <text-avatar text="{{curContact ? curContact.name[0].toUpperCase() : ''}}" size="64px"></text-avatar>
             </div>
             <div style="justify-content: space-around;align-items: center;height: 50%;width: 100%;">
                 <div class="item-wrapper" click-effect="spring-large" @click="handleSendMailClick">
                     <image src="../../common/images/send-mail.png" class="round"></image>
                     <text class="contacts-item-text">发邮件</text>
                 </div>
-                <div class="item-wrapper" click-effect="spring-large">
+                <div class="item-wrapper" click-effect="spring-large" @click="handleDelContacts">
                     <image src="../../common/images/del-friend.png" class="round" style="padding: 16px;"></image>
                     <text class="contacts-item-text">删除好友</text>
                 </div>

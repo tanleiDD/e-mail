@@ -11,6 +11,9 @@ export default {
       },
       color: {
           default: '#ADFF2F'
+      },
+      unread: {
+          default: false,
       }
     }
 }

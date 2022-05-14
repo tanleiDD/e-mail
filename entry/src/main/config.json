@@ -64,8 +64,8 @@
     "js": [
       {
         "pages": [
-          "pages/index/index",
           "pages/login/login",
+          "pages/index/index",
           "pages/test/test",
           "pages/read_email/read_email",
           "pages/write_email/write_email"

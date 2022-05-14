@@ -1,4 +1,7 @@
 <div class="card-avatar"
      style="width: {{size}};height: {{size}};border-radius: {{size}};border: 1px solid {{color}}">
     <text class="avatar-text" style="font-size: {{fontSize}};color: {{color}};">{{text}}</text>
+    <div class="{{unread ? 'red-dot' : ''}}">
+
+    </div>
 </div>

@@ -1,66 +1,47 @@
 import prompt from '@system.prompt';
 import router from '@system.router';
+import apiService from '../../utils/apiService.js'
 
 export default {
     data: {
-        contacts: [
-            {
-                title: 'A',
-                mails: [
-                    'acfun@163.com',
-                    'abc@163.com',
-                    'acfun@163.com',
-                    'abc@163.com',
-                    'acfun@163.com',
-                    'abc@163.com',
-                    'acfun@163.com',
-                    'abc@163.com',
-                ]
-            },
-            {
-                title: 'E',
-                mails: [
-                    'acfun@163.com',
-                    'abc@163.com',
-                    'acfun@163.com',
-                    'abc@163.com',
-                ]
-            },
-            {
-                title: 'I',
-                mails: [
-                    'acfun@163.com',
-                    'abc@163.com',
-                    'acfun@163.com',
-                    'abc@163.com',
-                ]
-            },
-            {
-                title: 'J',
-                mails: [
-                    'acfun@163.com',
-                    'abc@163.com',
-                    'acfun@163.com',
-                    'abc@163.com',
-                ]
-            },
-        ],
+        contacts: [],
         contactsPanelData: {
-            saveDisabled: true,
-            accountName: '', // 名称
-            mailAccount: '', // 账号
+            name: '', // 名称
+            account: '', // 账号
+        },
+        curContact: null, // 当前选中的联系人
+    },
+    props: {
+        index: {
+            default: 0,
         }
     },
     /* add user start */
     handleAddUserClick () {
-        this.contactsPanelData.saveDisabled = true;
         this.$element('contacts-panel').show();
     },
     handleCancelClick () {
         this.$element('contacts-panel').close();
     },
-    handleSaveClick () {
+    async handleSaveClick () {
         // 发送请求将受控组件的值保存到数据库
+        const { account, name } = this.contactsPanelData;
+
+        if (!account || !name) {
+            prompt.showToast({
+                message: '参数不全',
+                duration: 2000,
+                bottom: '50%',
+            })
+
+            return;
+        }
+        await apiService.addContacts({
+            account,
+            name
+        })
+
+        this.fetchContacts()
 
         this.$element('contacts-panel').close();
 
@@ -70,31 +51,104 @@ export default {
             bottom: '50%',
         })
     },
-    handleAccountNameChange (target) {
-        this.contactsPanelData.mailAccount = target.value;
-    },
-    handleMailAccountChange (target) {
-        if (target.value) {
-            this.contactsPanelData.saveDisabled = false;
-        } else {
-            this.contactsPanelData.saveDisabled = true;
-        }
-
-        this.contactsPanelData.mailAccount = target.value;
+    handleInput(e) {
+        const { field } = e.target.dataSet;
+        this.contactsPanelData[field] = e.value;
     },
     /* add user end */
 
     /* contacts item start */
-    handleContactsItemClick () {
-      this.$element('contacts-item-panel').show()
+    handleContactsItemClick (e) {
+        const { mail } = e.target.dataSet;
+        this.curContact = mail;
+
+        this.$element('contacts-item-panel').show()
     },
     handleCancelContactsItemClick () {
+        this.curContact = null;
         this.$element('contacts-item-panel').close();
     },
     /* contacts item end */
     handleSendMailClick (){
         router.push({
-            uri: 'pages/write_email/write_email'
+            uri: 'pages/write_email/write_email',
+            params: {
+                mail: this.curContact,
+            }
         })
+    },
+    async handleDelContacts () {
+        await apiService.delContacts({
+          account: this.curContact.account,
+        })
+
+        this.fetchContacts();
+
+        this.handleCancelContactsItemClick()
+
+        prompt.showToast({
+            message: '删除成功',
+            duration: 2000,
+            bottom: '50%',
+        })
+    },
+    async fetchContacts() {
+        const response = await apiService.getContacts();
+        const contacts = JSON.parse(response.result);
+
+        // 将 contacts 分下组
+        let groupedContacts = [];
+
+        for (let i=97; i<97+26; i++) {
+            groupedContacts.push({
+                title: String.fromCharCode(i).toUpperCase(),
+                mails: []
+            });
+        }
+
+        for (let i=48; i<48+10; i++) {
+            groupedContacts.push({
+                title: String.fromCharCode(i),
+                mails: []
+            });
+        }
+
+        contacts.forEach(contact => {
+            const { account, name } = contact;
+
+            const charCode = account.toLowerCase().charCodeAt(0);
+
+            let idx;
+
+            if (charCode >= 97 && charCode <= 97 + 26) {
+                idx = charCode - 97;
+            } else {
+                idx = charCode - 48 + 26;
+            }
+
+            groupedContacts[idx].mails.push({
+                account,
+                name
+            })
+        })
+
+        groupedContacts = groupedContacts.filter(item => {
+            return item.mails.length;
+        })
+
+        this.contacts = groupedContacts;
+
+        if (this.index === 1) {
+            this.$element('list').expandGroup({})
+        }
+
+    },
+    onInit() {
+        this.$watch('index', (index) => {
+            if (index === 1) {
+                this.fetchContacts();
+            }
+        });
     }
+
 }
