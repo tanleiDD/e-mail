@@ -37,7 +37,6 @@ function getUserInfo (account) {
         db.get(`SELECT * FROM users WHERE account = $account`, {
             $account: account,
         }, (err, row) => {
-            console.log(row);
             if (err) {
                 reject(err)
             } else {

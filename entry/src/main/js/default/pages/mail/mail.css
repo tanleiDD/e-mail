@@ -64,11 +64,11 @@
 
 .card-right {
     flex-direction: column;
-
 }
 
 ._from {
     font-size: 20px;
+    line-height: 20fp;
 }
 
 .title {
@@ -79,6 +79,7 @@
 .mail-date {
     font-size: 16px;
     color: #818181;
+    height: 20fp;
 }
 
 .mail-date {

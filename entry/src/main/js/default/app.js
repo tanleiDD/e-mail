@@ -1,6 +1,8 @@
 export default {
     data: {
-        account: '',
+    },
+    globalData: {
+        avatarUri: '/common/images/temp-avatar.jpg',
     },
     onCreate() {
         console.info('AceApplication onCreate');

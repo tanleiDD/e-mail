@@ -5,6 +5,8 @@ const dbUtils = require("./databaseUtils");
 const constants = require("./constants");
 const hmailUtils = require("./hmailUtils");
 const imapUtils = require("./imapUtils");
+const fs = require("fs");
+const formidable = require('formidable');
 
 const app = express();
 
@@ -31,7 +33,7 @@ app.use(express.urlencoded({extended: false}))
 
 // 处理身份认证
 app.use(async (req, res, next) => {
-    if (req.url === '/signup_login') {
+    if (req.url === '/signup_login' || req.url === '/upload') {
         next();
 
         return;
@@ -81,6 +83,7 @@ const imapPool = [];
 
 // 登录/注册 邮箱账号
 router.post('/signup_login', async (req, res) => {
+    console.log('/signup_login');
     const { account, password } = req.body;
 
     if (!account || !password) {
@@ -150,6 +153,38 @@ router.post('/signup_login', async (req, res) => {
 
 })
 
+// 上传文件
+router.post('/upload', async (req, res) => {
+    console.log('/upload');
+    const form = new formidable.IncomingForm();
+
+    form.encoding = 'utf-8';
+    form.uploadDir = path.join(__dirname + "./static");
+    form.keepExtensions = true;//保留后缀
+    // form.maxFieldsSize = 2 * 1024 * 1024;
+
+    //处理图片
+    form.parse(req, function (err, fields, files){
+        // var filename = files.img.name
+        // var nameArray = filename.split('.');
+        // var type = nameArray[nameArray.length - 1];
+        // var name = '';
+        // for (var i = 0; i < nameArray.length - 1; i++) {
+        //     name = name + nameArray[i];
+        // }
+        // name += '.' + type;
+        // var newPath = form.uploadDir + "/" + avatarName;
+
+        // fs.renameSync(files.img.path, newPath);  //重命名
+        console.log(files);
+        res.send({
+            code: 200,
+            message: "上传成功",
+            data: "/static/"+avatarName
+        })
+    })
+})
+
 // 因为 smtp 连接不如 imap 连接常用，因此不给 smtp 创建连接池
 router.post('/send', async (req, res) => {
     const { imap } = req;
@@ -173,9 +208,15 @@ router.post('/send', async (req, res) => {
         to,
         subject,
         text,
+        // attachments: [
+        //     {
+        //         path: './static/QQ图片20220527130340.jpg'
+        //     }
+        // ]
     };
   
     transport.sendMail(mailOptions, (err, info) => {
+        console.log(err, info);
         if(err) {
             res.status(constants.INTERNAL_SERVER_ERROR).send('发生错误')
         } else {
@@ -230,6 +271,18 @@ router.get('/mailbox/:mailboxName', async (req, res) => {
     }
 
     const result = await imapUtils.getMailbox(imap, mailboxNameMap[mailboxName]);
+
+    // result.forEach(item => {
+    //     const { attachments } = item;
+        
+    //     if (!attachments.length) {
+    //         return;
+    //     } 
+
+    //     const attachment = attachments[0];
+        
+    //     fs.writeFile(`./static/${attachment.filename}`, attachment.content, console.log)
+    // })
     
     if (mailboxName === 'INBOX') {
         res.send(result.filter(item => {
@@ -241,7 +294,6 @@ router.get('/mailbox/:mailboxName', async (req, res) => {
     } else {
         res.send(result)
     }
-
 })
 
 

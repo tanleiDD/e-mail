@@ -1,3 +1,5 @@
+<element name='shoot' src='../shoot/shoot.hml'></element>
+
 <div class="container">
     <div class="profile-header">
         <div class="header-title">
@@ -10,7 +12,7 @@
                     <div class="field" @click="handleAvatarClick">
                         <text class="field-name">头像</text>
                         <div class="field-right">
-                            <image class="round" src="{{avatar}}"></image>
+                            <image class="round" src="{{ avatarUri }}"></image>
                             <image class="arrow-right" src="../../common/images/arrow-right.png"></image>
                         </div>
                     </div>
@@ -50,23 +52,25 @@
             <div class="panel-title">
                 <text @click="handleCancelAvatarClick">取消</text>
 <!--                <text>头像</text>-->
-                <text @click="handleSaveAvatarClick" disabled="{{avatarPanelData.saveAvatarDisabled}}" class="{{avatarPanelData.saveAvatarDisabled ? 'save-avatar-disabled' : ''}}">保存</text>
+                <text @click="handleSaveAvatarClick" disabled="{{!isAvatarChange}}" class="{{!isAvatarChange ? 'save-avatar-disabled' : ''}}">保存</text>
             </div>
             <div style="height: 40%;justify-content: center;align-items: center;border-bottom: 1px solid  #E3E3E3;">
-                <image src="{{avatar}}" class="round" style="height: 64px;width: 64px;"></image>
+                <image src="{{ avatarPanelData.uri }}" class="round" style="height: 64px;width: 64px;"></image>
             </div>
             <div style="justify-content: space-around;align-items: center;height: 50%;width: 100%;">
-                <div class="item-wrapper" click-effect="spring-large">
+                <div class="item-wrapper" click-effect="spring-large" @click="handleCameraClick">
                     <image src="../../common/images/camera.png" class="round" style="width: 64px;height: 64px;"></image>
                     <text class="avatar-text">拍摄</text>
                 </div>
-                <div class="item-wrapper" click-effect="spring-large">
+                <div class="item-wrapper" click-effect="spring-large" @click="handleAlbumClick">
                     <image src="../../common/images/album.png" class="round" style="width: 64px;height: 64px;"></image>
                     <text class="avatar-text">从相册选择</text>
                 </div>
             </div>
-
         </div>
+    </panel>
+    <panel id="shoot-panel" type="temporary" mode="full">
+        <shoot set-avatar-uri="{{ setAvatarUri }}" close-camera="{{ handleCameraClose }}"></shoot>
     </panel>
 
 </div>

@@ -90,28 +90,22 @@ export default {
             return {
                 text,
                 _from: _from.value.map(item => {
-                    if (!item.name) {
-                        return {
-                            name: item.address,
-                            address: item.address,
-                        }
+                    return {
+                        name: !item.name ? item.address : item.name,
+                        address: item.address,
                     }
-                    return item;
                 }),
                 to: to.value.map(item => {
-                    if (!item.name) {
-                        return {
-                            name: item.address,
-                            address: item.address,
-                        }
+                    return {
+                        name: !item.name ? item.address : item.name,
+                        address: item.address,
                     }
-                    return item;
                 }),
                 subject,
                 date: new Date(date),
                 flags,
                 uid,
-                unread: !flags.includes('\\Seen')
+                unread: !flags.includes('\\Seen') && mailboxName !== 'Send'
             }
         })
 
@@ -131,6 +125,7 @@ export default {
     },
     async onShow() {
         await this.fetchMails(this.curMailbox.mailboxName)
+        console.log(this.$app.$def.globalData.avatarUri)
     },
     onInit() {
         this.$watch('curMailbox.mailboxName', this.fetchMails)

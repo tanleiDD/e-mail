@@ -47,14 +47,6 @@
         "launchType": "standard"
       },
       {
-        "name": "com.tanleidd.email.MainAbility2",
-        "icon": "$media:icon",
-        "description": "$string:mainability2_description",
-        "label": "$string:entry_MainAbility2",
-        "type": "page",
-        "launchType": "standard"
-      },
-      {
         "name": "com.tanleidd.email.ServiceAbility",
         "icon": "$media:icon",
         "description": "$string:serviceability_description",
@@ -66,21 +58,11 @@
         "pages": [
           "pages/login/login",
           "pages/index/index",
-          "pages/test/test",
           "pages/read_email/read_email",
+          "pages/shoot/shoot",
           "pages/write_email/write_email"
         ],
         "name": "default",
-        "window": {
-          "designWidth": 720,
-          "autoDesignWidth": true
-        }
-      },
-      {
-        "pages": [
-          "pages/index/index"
-        ],
-        "name": "default2",
         "window": {
           "designWidth": 720,
           "autoDesignWidth": true
@@ -93,6 +75,12 @@
       },
       {
         "name": "ohos.permission.CAMERA"
+      },
+      {
+        "name": "ohos.permission.DISTRIBUTED_DATASYNC"
+      },
+      {
+        "name": "ohos.permission.GET_DISTRIBUTED_DEVICE_INFO"
       }
     ],
     "metaData": {

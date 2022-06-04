@@ -1,0 +1,29 @@
+<div class="container">
+    <div>
+        <camera if="{{!avatarUri}}" class="camera" deviceposition="{{ deviceposition }}" @error="cameraError" ref="camera"></camera>
+        <image else class="camera-placeholder" src="{{avatarUri}}"></image>
+    </div>
+
+    <div class="controller">
+        <div class="circle" style="padding: 8fp 0 0 8fp; margin-right: -12px;" click-effect="spring-large"
+                @click="handleBackClick">
+            <image class="reverse" src="{{ '/common/images/camera-back.svg' }}">
+
+            </image>
+        </div>
+        <div class="circle" click-effect="spring-large" @click="handleShootClick">
+            <div class="round" if="{{!avatarUri}}">
+
+            </div>
+            <image else style="width: 60fp; height: 60fp; padding: 4fp;" src="../../common/images/camera-confirm.svg">
+
+            </image>
+        </div>
+        <div class="circle" style="padding: 8fp 0 0 8fp; margin-left: -12px;" click-effect="spring-large"
+                @click="handleReverseClick">
+            <image class="reverse" src="../../common/images/camera-reverse.svg">
+
+            </image>
+        </div>
+    </div>
+</div>

@@ -1,18 +1,22 @@
 import router from '@system.router';
 import prompt from '@system.prompt';
 import apiService from '../../utils/apiService.js'
+import document from '@ohos.document';
+import request from '@ohos.request';
+import { BASE_URL } from '../../utils/requests.js';
 
 export default {
     data: {
+        uri: '',
         name: '',
-        avatar: '/common/images/temp-avatar.jpg',
+        avatarUri: '/common/images/temp-avatar.jpg',
         namePanelData: {
             saveNameDisabled: true,
             name: '',
         },
         avatarPanelData: {
             saveAvatarDisabled: true,
-            avatar: '',
+            uri: '/common/images/temp-avatar.jpg',
         }
     },
     /* update name start */
@@ -53,11 +57,11 @@ export default {
         this.$element('avatar-panel').show();
     },
     handleCancelAvatarClick () {
+        this.avatarPanelData.uri = this.avatarUri;;
         this.$element('avatar-panel').close();
     },
     handleSaveAvatarClick () {
-        this.name = this.avatarPanelData.name;
-
+        this.avatarUri = this.avatarPanelData.uri;
         this.$element('avatar-panel').close();
 
         prompt.showToast({
@@ -66,15 +70,7 @@ export default {
             bottom: '50%',
         })
     },
-    handleAvatarChange (target) {
-        if (target.value) {
-            this.avatarPanelData.saveNameDisabled = false;
-        } else {
-            this.avatarPanelData.saveNameDisabled = true;
-        }
 
-        this.avatarPanelData.name = target.value;
-    },
     /* update avatar end */
 
     handleLogout () {
@@ -82,12 +78,31 @@ export default {
             uri: 'pages/login/login'
         })
     },
+    handleCameraClick () {
+        this.$element('shoot-panel').show();
+    },
+    handleCameraClose () {
+        this.$element('shoot-panel').close();
+    },
+    setAvatarUri (uri) {
+        this.avatarPanelData.uri = uri;
+    },
+    async handleAlbumClick () {
+        const uri =  await document.choose(['*']);
+        this.avatarPanelData.uri = uri;
+        console.log(uri)
+    },
     async onInit() {
         const response = await apiService.getUser();
         const user = JSON.parse(response.result);
 
         if (user) {
             this.name = user.name;
+        }
+    },
+    computed: {
+        isAvatarChange () {
+            return this.avatarUri !== this.avatarPanelData.uri;
         }
     }
 }

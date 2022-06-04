@@ -1,6 +1,7 @@
 import router from '@system.router';
 import apiService from '../../utils/apiService.js'
 import prompt from '@system.prompt';
+import document from '@ohos.document';
 
 export default {
     data: {
@@ -8,6 +9,7 @@ export default {
         subject: '',
         text: '',
         mail: null,
+        attachments: []
     },
     handleInput(e) {
         const { field } = e.target.dataSet;
@@ -46,6 +48,33 @@ export default {
     },
     handleCloseClick () {
         router.back();
+    },
+    async handleContinueAbility () {
+        const {to, subject, text} = this;
+        const result = await FeatureAbility.getDeviceList();
+        const networkId = result.data[0].networkId
+
+        const target = {
+            bundleName: "com.tanleidd.email",
+            abilityName: "com.tanleidd.email.MainAbility",
+            networkId,
+            url: "pages/write_email/write_email",
+            data: {
+                to,
+                subject,
+                text,
+            }
+        };
+
+        await FeatureAbility.startAbility(target);
+    },
+    async handleChooseAttachment () {
+        const uri =  await document.choose(['*']);
+
+        this.attachments.push(uri);
+    },
+    handleDelAttach () {
+      this.attachments.pop();
     },
     onInit() {
         const { mail } = this;

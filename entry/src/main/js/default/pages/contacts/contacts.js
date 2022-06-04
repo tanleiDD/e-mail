@@ -113,6 +113,11 @@ export default {
             });
         }
 
+        groupedContacts.push({
+            title: '其他',
+            mails: []
+        });
+
         contacts.forEach(contact => {
             const { account, name } = contact;
 
@@ -122,8 +127,10 @@ export default {
 
             if (charCode >= 97 && charCode <= 97 + 26) {
                 idx = charCode - 97;
-            } else {
+            } else if (charCode >=48 && charCode <= 48 + 10){
                 idx = charCode - 48 + 26;
+            } else {
+                idx = 36;
             }
 
             groupedContacts[idx].mails.push({

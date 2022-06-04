@@ -1,0 +1,44 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+}
+.camera,
+.camera-placeholder{
+    position: relative;
+    top: -100fp;
+    width: 100%;
+    height: 360fp;
+}
+
+.controller {
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.circle {
+    padding: 8fp;
+    border: 1fp solid #317AFF;
+    border-radius: 100fp;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.round {
+    width: 60fp;
+    height: 60fp;
+    border-radius: 60fp;
+    background-color: #317AFF;
+
+}
+
+.reverse {
+    width: 40fp;
+    height: 40fp;
+}

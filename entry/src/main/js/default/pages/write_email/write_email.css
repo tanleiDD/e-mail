@@ -82,9 +82,30 @@
 .content-data {
     background-color: white;
     border-radius: 0;
-    height: 75%;
+    height: 200fp;
 }
 
+.attachments {
+    position: absolute;
+    width: 100%;
+    bottom: 0fp;
+    left: 0fp;
+    padding: 12fp 8fp;
+    background-color: #C9CACC;
 
+}
 
+.attach-img {
+    width: 80fp;
+    height: 80fp;
+    border-radius: 5fp;
+    margin-left: 8fp
+}
 
+.del-attach {
+    width: 20fp;
+    height: 20fp;
+    position: absolute;
+    top: -2fp;
+    right: -2fp;
+}

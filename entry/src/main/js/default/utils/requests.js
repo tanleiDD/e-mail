@@ -2,8 +2,9 @@ import http from '@ohos.net.http';
 import storageUtil from './storageUtil.js'
 
 // 访问本地不可以用 localhost 或 127.0.0.1，需要查出本机的地址
-const BASE_URL = 'http://192.168.31.135:3000'
+export const BASE_URL = 'http://192.168.31.135:3000'
 //const BASE_URL = 'http://192.168.43.14:3000'
+//export const BASE_URL = 'http://www.tanleidd.fit:3000'
 
 export default async function requests (url='', options={}) {
     const httpRequest = http.createHttp();

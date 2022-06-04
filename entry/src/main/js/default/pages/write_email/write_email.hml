@@ -12,8 +12,9 @@
                 </div>
             </div>
         </div>
-        <div class="header-right" @click="handlePlaneClick">
-            <image class="icon" src="../../common/images/plane-active.png"></image>
+        <div class="header-right" >
+            <image class="icon" src="../../common/images/continue.png" @click="handleContinueAbility"></image>
+            <image class="icon" style="width: 36fp; height: 36fp; margin-left: 2fp; margin-top: -1fp;" src="../../common/images/plane-active.png" @click="handlePlaneClick"></image>
         </div>
     </div>
     <div class="write_email-content">
@@ -26,9 +27,20 @@
             </div>
             <div class="theme">
                 <input class="meta-field" type="text" placeholder="主题" value="{{subject}}" @change="handleInput" data-field="subject"></input>
-                <image class="icon attach" src="../../common/images/attachment.png" ></image>
+                <image class="icon attach" src="../../common/images/attachment.png" @click="handleChooseAttachment"></image>
             </div>
         </div>
         <textarea class="content-data" value="{{text}}" @change="handleInput" data-field="text"></textarea>
+    </div>
+    <div class="attachments" if="{{attachments.length}}">
+        <div for="{{attachments}}">
+            <image src="{{$item}}" class="attach-img">
+
+            </image>
+            <image src="../../common/images/close.svg" class="del-attach" @click="{{handleDelAttach}}">
+
+            </image>
+        </div>
+
     </div>
 </div>
